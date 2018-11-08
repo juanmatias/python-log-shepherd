@@ -4,6 +4,10 @@ A simple Python logs shipper.
 
 ![shepherd](images/shepherd.png  "shepherd")
 
+## Note
+
+This project is still under construction.
+
 ## What is PLS?
 
 This develop is motivated by the need of have a log shipper for AIX.
