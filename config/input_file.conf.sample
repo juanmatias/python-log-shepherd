@@ -1,0 +1,7 @@
+[Input]
+# Paths to file, comma separated
+Paths=/path/to/file/log.log,/path/to/file/log2.log
+
+[Registry]
+# Path
+Path=/path/to/file/input_file.reg

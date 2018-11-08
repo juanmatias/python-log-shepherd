@@ -1,0 +1,8 @@
+[Plugins]
+Reader=file
+Filter=
+Writer=stdout
+
+[Config]
+# An integer value
+Interval=5

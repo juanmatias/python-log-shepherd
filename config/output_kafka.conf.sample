@@ -1,0 +1,6 @@
+[Config]
+# Topic is a string
+Topic=test
+# List of servers comma separated server:port
+Servers=192.168.0.100:9092
+Reconnection_max=2
