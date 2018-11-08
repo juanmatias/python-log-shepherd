@@ -7,7 +7,7 @@
 
 import logging
 import json
-import ConfigParser
+import vendors.ConfigParser as ConfigParser
 import os
 from kafka import KafkaProducer
 

@@ -9,7 +9,7 @@ import logging
 import time
 import importlib
 import signal
-import ConfigParser
+import vendors.ConfigParser as ConfigParser
 import os
 
 class shepherd_importer:

@@ -9,7 +9,7 @@ import logging
 import time
 import os 
 import io
-import ConfigParser
+import vendors.ConfigParser as ConfigParser
 import pickle
 
 # This is the file reader plugin
