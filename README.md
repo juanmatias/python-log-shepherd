@@ -28,9 +28,9 @@ The main loop is quite simple:
   2. Instantiate the filter plugin
   3. Instantiate the output plugin
   4. Call the input
-  5. If there is no errror call the filter
-  6. If there is no errror call the output
-  7. If there is no errror call the input ack
+  5. If there is no error call the filter
+  6. If there is no error call the output
+  7. If there is no error call the input ack
   8. Sleep n seconds
   9. Repeat the loop from point 4
   
