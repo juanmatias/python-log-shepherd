@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Python Log Shepherd
 # Script to read data sources and send data to consumer (kafka, logstash, etc)
