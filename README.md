@@ -68,6 +68,9 @@ Rules to add a plugin:
 ### Filters
 
 
+## Starter
+
+It was added a file called *python-log-shepherd-starter.sh* that can be used by cron to start the app. It will check if it is running and if it is not then *starter* will start de app.
 
 ## Note on ConfigParser
 
@@ -80,3 +83,6 @@ If you want to use the package or you have installed it as default, chage this l
 to this one:
 
 	import ConfigParser
+	
+*NOTE: kafka-python needs also to be installed, so this title needs to be reviewed, maybe we can use pip and install ConfigParser from packages.*
+
