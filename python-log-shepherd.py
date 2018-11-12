@@ -12,6 +12,8 @@ import signal
 import vendors.ConfigParser as ConfigParser
 import os
 
+version="1.0.0"
+
 class shepherd_importer:
   def pimport(self,plugin, class_name):
     try:
