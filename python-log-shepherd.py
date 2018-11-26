@@ -182,8 +182,11 @@ class python_shepherd:
       else:
         logging.error('Reader error')
         quit()
-            
-      time.sleep(self.interval_default)
+      
+      if(self.interval_default != -1):
+        time.sleep(self.interval_default)
+      else:
+        self.lower_the_herd(None,None)
     
   
 if __name__ == "__main__":

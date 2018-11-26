@@ -31,7 +31,7 @@ The main loop is quite simple:
   5. If there is no error call the filter
   6. If there is no error call the output
   7. If there is no error call the input ack
-  8. Sleep n seconds
+  8. Sleep n seconds if n > -1, otherwhise exits program
   9. Repeat the loop from point 4
   
 ## Usage
