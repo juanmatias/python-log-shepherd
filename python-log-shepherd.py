@@ -63,22 +63,44 @@ class shepherd_reader:
   
 class shepherd_filter:
   def __init__(self, plugin):
-    assert isinstance(plugin, str), 'Plugin must be str'
-    self.plugin = plugin
+    assert isinstance(plugin, str) or isinstance(plugin, list), 'Plugin must be str or list'
+    self.plugins = []
+    self.f = []
 
+    if(isinstance(plugin, str) and plugin!=''):
+      logging.info('Setting reader plugin name to import: '+plugin)
+      self.plugins.append(plugin)
+    else:
+      self.plugins = plugin
+      
+    if(len(self.plugins)>0):
+      si = shepherd_importer()
+      logging.info('Trying to load {} filter plugin/s'.format(len(self.plugins)))
+      for pluginname in self.plugins:
+        try:
+          logging.info('Adding filter {}'.format(pluginname))
+          self.f.append(si.pimport("filter_"+pluginname,pluginname+"_filter"))
+        except Exception as error:
+          logging.error('Got an error calling module: ' + repr(error))
+          quit()
+    else:
+      logging.info('No need to load filters.')
+      
   def filter(self,data):
     assert isinstance(data, list), 'Data must be a list'
     logging.info('Filtering data')
-    if self.plugin == '':
+    if len(self.plugins) == 0:
       logging.info('No filtering needed')
       return True
-    getattr(self.f,self.plugin+"_filter")(data)
+    for idx,current_filter in enumerate(self.plugins):
+      logging.info('Applying filter: {}'.format(current_filter))
+      getattr(self.f[idx],current_filter+"_filter")(data)
 
     return True
     
   def lower_the_herd(self):
-    if(self.plugin!=''):
-      getattr(self.f,self.plugin+"_shutdown")()
+    # ~ if len(self.plugins) > 0:
+      # ~ getattr(self.f,self.plugins+"_shutdown")()
     return True
   
 class shepherd_writer:
@@ -130,14 +152,16 @@ class python_shepherd:
     config_file = os.path.dirname(os.path.realpath(__file__)) + '/config/python-log-shepherd.conf'
     self.configParser.read(config_file)
     self.reader_plugin = self.configParser.get('Plugins','Reader')
-    self.filter_plugin = self.configParser.get('Plugins','Filter')
+    self.filter_plugin = self.configParser.get('Plugins','Filter').split(',')
     self.writer_plugin = self.configParser.get('Plugins','Writer')
     if(isinstance(int(self.configParser.get('Config','Interval')),int)):
       logging.info('Changing interval to '+self.configParser.get('Config','Interval'))
       self.interval_default = int(self.configParser.get('Config','Interval'))
     
   def lower_the_herd(self,sig, frame):
-    logging.info('SIGINT received, shutting down processes')
+    if(sig != None):
+      logging.info('SIG {} received'.format(sig))
+    logging.info('Shutting down child processes')
     try:
       self.sr.lower_the_herd()
       self.sf.lower_the_herd()

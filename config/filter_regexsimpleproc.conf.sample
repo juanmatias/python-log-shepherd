@@ -1,0 +1,22 @@
+# Add sections to have multiple processing regexps
+# Keep in mind that these RegExps will be applied sequentially
+
+[RegexpSetName01]
+# We receive a dict, from what field must take data
+Current_source = message
+# In the resulting object, what field will group extracted fields (empty string means extracted fields go to root level)
+Current_target_root = extracted
+# Regexp to perfom the match
+Current_regex = ^<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>.*
+# Fields to store extracted values comma separated (must be the same qty than the groups in regexp
+Current_fields = datetime,type,component,code,message
+
+[RegexpSetName02]
+# We receive a dict, from what field must take data
+Current_source = message
+# In the resulting object, what field will group extracted fields (empty string means extracted fields go to root level)
+Current_target_root = extracted
+# Regexp to perfom the match
+Current_regex = ^<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>\s+<([^>]+)>.*
+# Fields to store extracted values comma separated (must be the same qty than the groups in regexp
+Current_fields = datetime,type,component,code,message

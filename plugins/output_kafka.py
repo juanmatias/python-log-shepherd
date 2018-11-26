@@ -10,6 +10,7 @@ import json
 import vendors.ConfigParser as ConfigParser
 import os
 from kafka import KafkaProducer
+import time
 
 # This is the writer to kafka plugin
 # Must have a class called <plugin_name>_writer
@@ -31,6 +32,8 @@ class kafka_writer:
 
     try:
       self.topic = self.configParser.get('Config','Topic')
+      self.t = self.configParser.get('Config','t')
+      self.e = self.configParser.get('Config','e')
       self.servers = self.configParser.get('Config','Servers')
       self.reconnection_max = self.configParser.get('Config','Reconnection_max')
     except Exception as error:
@@ -55,12 +58,17 @@ class kafka_writer:
     try:
       logging.info("Sending message...")
       data_str_to_send = ''
+      counter = 0
       for d in data:
         sent = self.producer.send(self.topic, json.dumps(d, indent=4).encode('utf-8'))
         result = sent.get(timeout=60)
+        counter += 1
+        if float(self.t) > 0 and int(self.e) <= counter:
+          time.sleep(float(self.t))
+          counter = 0
     except Exception as error:
       self.producer = None
-      logging.warning('Error sendin data to kafka ('+repr(error)+')')
+      logging.warning('Error sending data to kafka ('+repr(error)+')')
       return False
 
     return True
@@ -68,7 +76,8 @@ class kafka_writer:
   def kafka_shutdown(self):
     # Actions to take on process shutdown
     return True
-  
+
+
 if __name__ == "__main__":
   quit()
 

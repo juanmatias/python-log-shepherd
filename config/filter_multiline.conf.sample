@@ -1,0 +1,7 @@
+[Multiline]
+# What source field stores the log lines
+Line_source = message
+# Regexp to match the beginning of the line
+Line_start = ^<
+# Regexp to match the end of the line
+Line_end = >$
