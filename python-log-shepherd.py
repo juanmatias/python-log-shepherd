@@ -12,7 +12,8 @@ import signal
 import vendors.ConfigParser as ConfigParser
 import os
 
-version="1.0.0"
+from __version__ import _version
+_appname = 'Python Log Shepherd'
 
 class shepherd_importer:
   def pimport(self,plugin, class_name):
@@ -123,6 +124,7 @@ class python_shepherd:
     # Set log level
     logging.basicConfig(format='%(asctime)s %(levelname)s ( %(module)s ):%(message)s',level=logging.DEBUG)
     signal.signal(signal.SIGINT, self.lower_the_herd)
+    logging.info('{} version: {}'.format(_appname,_version))
     logging.info('Reading config file for main process')
     self.configParser = ConfigParser.RawConfigParser()   
     config_file = os.path.dirname(os.path.realpath(__file__)) + '/config/python-log-shepherd.conf'
