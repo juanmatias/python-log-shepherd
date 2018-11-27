@@ -9,6 +9,6 @@ A simple Python logs shipper.
 | \# | Name | Description | Added in commit | Date |
 | :----------- | ----------: | :---------------: | | | 
 |  1  | Filename Wildcard in input_file | Add the ability to handle wildcards for files definitions in input_file | | | 
-|  2  | Add filters to core | Add the ability to call multiple filters after data input and before data output. | | | 
+|  2  | Add filters to core | Add the ability to call multiple filters after data input and before data output. | 776f0fb8465bcd7b26db9a6f07515f3306eb07dd | develop | 
 
 
