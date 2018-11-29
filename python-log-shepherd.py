@@ -14,6 +14,7 @@ import os
 
 from __version__ import _version
 _appname = 'Python Log Shepherd'
+_appnametag = 'python-log-shepherd'
 
 class shepherd_importer:
   def pimport(self,plugin, class_name):
@@ -125,7 +126,12 @@ class shepherd_writer:
     try:
       local_data = []
       for d in data:
-        local_data.append(dict({'@timestamp': time.time(), '@tags':['python-log-shepherd']},**d))
+        tags = [_appnametag]
+        if '@tags' in d:
+          tags.extend(d['@tags'])
+        d['@tags'] = tags
+        d['@timestamp'] =  time.time()
+        local_data.append(d)
       getattr(self.w,self.plugin+"_write")(local_data)
     except Exception as error:
       logging.error('Got an error calling module: ' + repr(error))

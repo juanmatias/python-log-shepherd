@@ -1,0 +1,17 @@
+# You can set multiple sections for multiple conditions to be applied
+
+[CustomTagsPattern01]
+# Custom tags comma separated
+CustomTags = dev,test1,patoruzu
+# Regex, if match then apply tags, otherwise do not (empty to not apply regex)
+CustomRegex = ^[0-9]{4}
+# What field to apply the regex?
+CustomRegexSource = message
+
+[CustomTagsPattern02]
+# Custom tags comma separated
+CustomTags = other_tags
+# Regex, if match then apply tags, otherwise do not (empty to not apply regex)
+CustomRegex =
+# What field to apply the regex?
+CustomRegexSource = message
