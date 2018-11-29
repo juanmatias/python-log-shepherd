@@ -11,5 +11,6 @@ A simple Python logs shipper.
 |  1  | Filename Wildcard in input_file | Add the ability to handle wildcards for files definitions in input_file | | | 
 |  2  | Add filters to core | Add the ability to call multiple filters after data input and before data output. | 776f0fb8465bcd7b26db9a6f07515f3306eb07dd | develop | 
 |  3  | Add server data to event | Add a few data from server such IP and name  | | | 
+|  4  | Add custom tags to event | Add a plugin that allows to add custom tags to events  | | | 
 
 
