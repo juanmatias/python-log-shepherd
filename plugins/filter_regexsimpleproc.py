@@ -47,10 +47,10 @@ class regexsimpleproc_filter:
 
 
         message = item[current_source]
-        if current_target_root != '':
-          item[current_target_root] = {}
         current_match = current_regex.match(message)
         if current_match:
+          if current_target_root != '' and (not current_target_root in item):
+            item[current_target_root] = {}
           for cmidx,cm in enumerate(current_match.groups()):
             if current_target_root != '':
               item[current_target_root][current_fields[cmidx]] = cm
