@@ -14,6 +14,7 @@ A simple Python logs shipper.
 |  4  | Add custom tags to event | Add a plugin that allows to add custom tags to events  | ed8ece129c8a89d518009821994a9a96f70224c5 | develop 1.1.0 | 
 |  5  | Improve the cli | Add the ability to receive cli parameters to set configuration values | | | 
 |  6  | Logs rotation | Allow logs rotation and old logs deletion | | | 
+|  7  | Improve documentation | Improve all in-code documentation according to standars | | | 
 
 
 ## Requested Fixes
