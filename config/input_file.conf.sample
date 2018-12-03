@@ -1,6 +1,6 @@
 [Input]
 # Paths to file, comma separated
-Paths=/path/to/file/log.log,/path/to/file/log2.log
+Paths=/path/to/file/*.log,/path/to/file/multi/*/*.log
 # If reading file from beginning and filesize > MaxBytes and MaxBytes != -1 we read the last MaxBytes from file
 MaxBytes=1024000
 

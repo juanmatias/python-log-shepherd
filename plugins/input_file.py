@@ -9,6 +9,7 @@ import logging
 import time
 import os 
 import io
+import glob
 import vendors.ConfigParser as ConfigParser
 import pickle
 
@@ -43,7 +44,10 @@ class file_reader:
   def file_read(self,data):
     # Actions to take to read data
     logging.info("Reading data from sources")
+    file_collection = []
     for f in self.configParser.get('Input','Paths').split(','):
+      file_collection.extend(glob.glob(f))
+    for f in file_collection:
       logging.info("Reading data from "+f)
       try:
         if not f in self.file_positions:
