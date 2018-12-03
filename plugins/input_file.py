@@ -25,6 +25,7 @@ class file_reader:
       config_file = os.path.dirname(os.path.realpath(__file__)) + '/../config/input_file.conf'
       self.configParser = ConfigParser.RawConfigParser()
       self.configParser.read(config_file)
+      self.MaxBytes = int(self.configParser.get('Input','MaxBytes'))
     except Exception as error:
       raise ValueError('Error reading config file '+config_file+' ('+repr(error)+')')
       
@@ -53,6 +54,10 @@ class file_reader:
           logging.info('inode has changed, log file was rotated, must read from beginning (  '+str(self.file_positions[f]['inode'])+' vs. '+str(os.stat(f).st_ino)+')')
           self.file_positions[f]['offset'] = 0
         with io.open(f, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as fs:
+          if self.file_positions[f]['offset'] == 0 and self.MaxBytes != -1 and self.MaxBytes < os.fstat(
+              fs.fileno()).st_size:
+            self.file_positions[f]['offset'] = os.fstat(fs.fileno()).st_size - self.MaxBytes
+            logging.info("Resetting offset from 0 to {} - {} = {} ".format(os.fstat(fs.fileno()).st_size, self.MaxBytes,self.file_positions[f]['offset']))
           logging.info("Looking for offset "+str(self.file_positions[f]['offset']))
           fs.seek(self.file_positions[f]['offset'])
           localdata = map(lambda x: {'message':x,'source':f}, fs.readlines())
