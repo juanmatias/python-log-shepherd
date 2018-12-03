@@ -150,7 +150,7 @@ class python_shepherd:
   
   def __init__(self):
     # Set log level
-    logging.basicConfig(format='%(asctime)s %(levelname)s ( %(module)s ):%(message)s',level=logging.DEBUG)
+    logging.basicConfig(format='%(asctime)s %(levelname)s ( %(module)s ):%(message)s',level=logging.INFO)
     signal.signal(signal.SIGINT, self.lower_the_herd)
     logging.info('{} version: {}'.format(_appname,_version))
     logging.info('Reading config file for main process')
