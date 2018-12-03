@@ -13,6 +13,7 @@ A simple Python logs shipper.
 |  3  | Add server data to event | Add a few data from server such IP and name  | 37833cf1ea9d4803a79f5b90b93537e74f8a63c8 | develop 1.1.0 | 
 |  4  | Add custom tags to event | Add a plugin that allows to add custom tags to events  | ed8ece129c8a89d518009821994a9a96f70224c5 | develop 1.1.0 | 
 |  5  | Improve the cli | Add the ability to receive cli parameters to set configuration values | | | 
+|  6  | Logs rotation | Allow logs rotation and old logs deletion | | | 
 
 
 ## Requested Fixes
