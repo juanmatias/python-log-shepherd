@@ -19,4 +19,4 @@ A simple Python logs shipper.
 
 | \# | Name | Description | Added in commit | Date |
 | :----------- | ----------: | :---------------: | | | 
-|  1  | regexsimpleproc overwrites target field | If two or more regexps set the same target field (e.g. extracted) the field is overwritten, it should add the no existent fields under target field | | | 
+|  1  | regexsimpleproc overwrites target field | If two or more regexps set the same target field (e.g. extracted) the field is overwritten, it should add the no existent fields under target field | 40aebd0ed058d703b1f99c73fb4677aefb4724a3 | develop 1.1.0 | 
