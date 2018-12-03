@@ -20,4 +20,4 @@ A simple Python logs shipper.
 | \# | Name | Description | Added in commit | Date |
 | :----------- | ----------: | :---------------: | | | 
 |  1  | regexsimpleproc overwrites target field | If two or more regexps set the same target field (e.g. extracted) the field is overwritten, it should add the no existent fields under target field | 40aebd0ed058d703b1f99c73fb4677aefb4724a3 | develop 1.1.0 | 
-|  2  | Memory limit to read files | Add a limit whe reading a new file from beginning so we do not use all the available memory |  |  | 
+|  2  | Memory limit to read files | Add a limit whe reading a new file from beginning so we do not use all the available memory | 237910c252ed87e41800c6b0c34de5466e105e8d | develop 1.1.0 | 
