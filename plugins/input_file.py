@@ -32,6 +32,7 @@ class file_reader:
 
     logging.info("Open registry file")
     registryFileFullPath = self.configParser.get('Registry','Path')
+
     try:
       with io.open(registryFileFullPath, mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
         self.file_positions = pickle.load(f)
@@ -41,7 +42,8 @@ class file_reader:
       with io.open(registryFileFullPath, mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
         self.file_positions = pickle.load(f)
     except Exception as error:
-      raise ValueError('Error opening registry file '+self.configParser.get('Registry','Path')+' ('+repr(error)+')')
+      logging.error('Error opening registry file : ' + str(error))
+      raise ValueError('Error reading Registry File')
 
   def file_read(self,data):
     # Actions to take to read data
