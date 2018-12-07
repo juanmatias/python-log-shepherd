@@ -7,7 +7,7 @@
 
 import logging
 import time
-import os 
+import os
 import io
 import glob
 import vendors.ConfigParser as ConfigParser
@@ -19,7 +19,7 @@ import pickle
 
 class file_reader:
   file_positions = {}
-  
+
   def __init__(self):
     logging.info("Reading config file for input_file module")
     try:
@@ -29,18 +29,22 @@ class file_reader:
       self.MaxBytes = int(self.configParser.get('Input','MaxBytes'))
     except Exception as error:
       raise ValueError('Error reading config file '+config_file+' ('+repr(error)+')')
-      
+
     logging.info("Open registry file")
+    registryFileFullPath = self.configParser.get('Registry','Path')
+
     try:
-      with io.open(self.configParser.get('Registry','Path'), mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
+      with io.open(registryFileFullPath, mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
         self.file_positions = pickle.load(f)
     except IOError:
+      logging.error('There was an IOError trying to Open regitry file')
       self.file_ack()
-      with io.open(self.configParser.get('Registry','Path'), mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
+      with io.open(registryFileFullPath, mode='rb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
         self.file_positions = pickle.load(f)
     except Exception as error:
-      raise ValueError('Error opening registry file '+self.configParser.get('Registry','Path')+' ('+repr(error)+')')
-    
+      logging.error('Error opening registry file : ' + str(error))
+      raise ValueError('Error reading Registry File')
+
   def file_read(self,data):
     # Actions to take to read data
     logging.info("Reading data from sources")
@@ -77,18 +81,19 @@ class file_reader:
   def file_shutdown(self):
     # Actions to take on process shutdown
     return True
-  
+
   def file_ack(self):
     # Actions to take when sent data ack is received
     logging.info("Pickle file_positions to file")
+    registryFileFullPath = self.configParser.get('Registry','Path')
     try:
-      with io.open(self.configParser.get('Registry','Path'), mode='wb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
+      with io.open(registryFileFullPath, mode='wb', buffering=-1, encoding=None, errors=None, newline=None, closefd=True) as f:
         pickle.dump(self.file_positions, f)
     except Exception as error:
-      raise ValueError('Error piclking var ('+repr(error)+')')
+      logging.error('There was an error checking the Registry File: ' + registryFileFullPath)
+      logging.error(str(error))
+      raise ValueError('Error piclking var')
     return True
-    
+
 if __name__ == "__main__":
   quit()
-
-

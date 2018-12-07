@@ -17,7 +17,7 @@ _appname = 'Python Log Shepherd'
 _appnametag = 'python-log-shepherd'
 
 class shepherd_importer:
-  def pimport(self,plugin, class_name):
+  def pimport(self, plugin, class_name):
     try:
       module = importlib.import_module("."+plugin, "plugins")
       class_ = getattr(module, class_name)
@@ -79,8 +79,12 @@ class shepherd_filter:
       logging.info('Trying to load {} filter plugin/s'.format(len(self.plugins)))
       for pluginname in self.plugins:
         try:
-          logging.info('Adding filter {}'.format(pluginname))
-          self.f.append(si.pimport("filter_"+pluginname,pluginname+"_filter"))
+          if (len(pluginname)>0):
+            logging.info('Adding filter {}'.format(pluginname))
+            self.f.append(si.pimport("filter_"+pluginname,pluginname+"_filter"))
+          else:
+            logging.error('Plugin name can not be empty')
+
         except Exception as error:
           logging.error('Got an error calling module: ' + repr(error))
           quit()
